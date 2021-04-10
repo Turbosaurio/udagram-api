@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 services:
   udagram-api:
     container_name: udagram-api
