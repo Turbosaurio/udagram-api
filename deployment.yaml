@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: udagram-api
+  labels:
+    app: udagram-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: udagram-api
+  template:
+    metadata:
+      labels:
+        app: udagram-api
+    spec:
+      containers:
+      - name: api
+        image: turbosaurio/api
+        ports:
+        - containerPort: 8080
+        command: ["sleep","infinity"]
