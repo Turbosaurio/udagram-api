@@ -43,3 +43,4 @@ venv/
 
 
 .env
+aws_secret.yaml
