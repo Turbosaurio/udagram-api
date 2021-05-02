@@ -40,6 +40,7 @@ import {V0_FEED_MODELS, V0_USER_MODELS} from './controllers/v0/model.index';
   // Start the Server
   app.listen( port, () => {
     console.log( `server running service in ${port}` );
+    console.log( `server allows connections from ${config.url}` );
     console.log( `press CTRL+C to stop server` );
   } );
 })();
