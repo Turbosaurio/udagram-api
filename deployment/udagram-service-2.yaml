@@ -1,25 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: udagram-api
+  name: udagram-service-2
   labels:
-    app: udagram-api
+    app: udagram-service-2
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: udagram-api
+      app: udagram-service-2
   template:
     metadata:
       labels:
-        app: udagram-api
+        app: udagram-service-2
     spec:
       containers:
       - name: api
-        image: turbosaurio/api
+        image: turbosaurio/api-2
         ports:
-        - containerPort: 8080
+        - containerPort: 8030
         env:
+          - name: URL
+            valueFrom:
+              configMapKeyRef:
+                name: env-config
+                key: URL
+
           - name: POSTGRES_USERNAME
             valueFrom:
               configMapKeyRef:
@@ -59,9 +65,23 @@ spec:
             valueFrom:
               configMapKeyRef:
                 name: env-config
-                key: JWT_SECRET
+                key: URL
           - name: URL
             valueFrom:
               configMapKeyRef:
                 name: env-config
                 key: URL
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: udagram-service-2
+spec:
+  ports:
+  - port: 8030
+    targetPort: 8030
+    protocol: TCP
+  selector:
+    run: udagram-service-2

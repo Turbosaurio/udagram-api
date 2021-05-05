@@ -1,0 +1,30 @@
+version: '3'
+services:
+  udagram-frontend:
+    container_name: udagram-frontend
+    image: frontend
+    build: ./udagram-frontend/.
+    ports:
+      - "8100:80"
+  udagram-api:
+    container_name: udagram-api
+    image: api
+    build: ./udagram-api/.
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+  udagram-service-2:
+    container_name: udagram-service-2
+    image: api-2
+    build: ./udagram-service-2/.
+    env_file:
+      - .env
+    ports:
+      - "8030:8030"
+  udagram-proxy:
+    container_name: reverseproxy
+    image: reverseproxy
+    build: ./udagram-proxy/.
+    ports:
+      - "3000:3000"
