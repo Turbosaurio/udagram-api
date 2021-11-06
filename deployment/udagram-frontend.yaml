@@ -18,8 +18,12 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 80
-        command: [ "echo", "SUCCESS" ]
-
+        env:
+          - name: POSTGRES_USERNAME
+            valueFrom:
+              configMapKeyRef:
+                name: env-config
+                key: AWS_BUCKET
 ---
 
 apiVersion: v1
@@ -28,10 +32,10 @@ metadata:
   name: udagram-frontend
 spec:
   ports:
-  - port: 80
+  - protocol: TCP
+    port: 80
     targetPort: 80
-    protocol: TCP
-    nodePort: 31000
+    # nodePort: 31002
   selector:
     app: udagram-frontend
   type: LoadBalancer

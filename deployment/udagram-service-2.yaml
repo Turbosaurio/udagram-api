@@ -5,7 +5,7 @@ metadata:
   labels:
     app: udagram-service-2
 spec:
-  replicas: 2
+  replicas: 0
   selector:
     matchLabels:
       app: udagram-service-2
